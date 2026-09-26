@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Al-Ameen Islamic Institute - Fee Management</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6fa;
+            color: #17233c;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        /* HEADER */
+
+        .app-header {
+            background: #17345f;
+            color: white;
+            padding: 15px 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand-logo-wrap {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .school-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-title {
+            margin: 0;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .brand-sub {
+            margin: 5px 0 0;
+            color: #d8e2f3;
+            font-size: 14px;
+        }
+
+        .header-badge {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        /* NAVIGATION */
+
+        .tabs {
+            background: white;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            padding: 0 25px;
+        }
+
+        .tabs button {
+            border: none;
+            background: transparent;
+            padding: 18px 25px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #52627a;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tabs button:hover {
+            color: #17345f;
+            background: #f7f9fc;
+        }
+
+        .tabs button.active {
+            color: #17345f;
+            border-bottom-color: #c99718;
+        }
+
+        /* MAIN */
+
+        main {
+            max-width: 1400px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        .page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .compact-heading {
+            margin-bottom: 20px;
+        }
+
+        .eyebrow {
+            margin: 0 0 5px;
+            color: #b17b00;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .page-subtitle {
+            margin: 8px 0 0;
+            color: #6c7890;
+        }
+
+        .today-chip {
+            background: white;
+            border: 1px solid #dde3ec;
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: #52627a;
+            font-size: 14px;
+        }
+
+        /* STATS */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e0e5ee;
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 3px 12px rgba(30,45,70,0.04);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .stat-icon.blue {
+            background: #e8f0ff;
+            color: #2456a6;
+        }
+
+        .stat-icon.green {
+            background: #e6f7ed;
+            color: #168449;
+        }
+
+        .stat-icon.red {
+            background: #fdeaea;
+            color: #c23838;
+        }
+
+        .stat-icon.gold {
+            background: #fff5d8;
+            color: #a46e00;
+        }
+
+        .stat-card span {
+            display: block;
+            color: #77839a;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .stat-card strong {
+            font-size: 23px;
+        }
+
+        /* CARD */
+
+        .card {
+            background: white;
+            border: 1px solid #dfe5ee;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 15px rgba(30,45,70,0.04);
+        }
+
+        .card-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-pill {
+            background: #edf3ff;
+            color: #27569b;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .danger-pill {
+            background: #fdecec;
+            color: #b52c2c;
+        }
+
+        /* FORMS */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .field-wide {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: bold;
+            color: #45546b;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d5dce7;
+            border-radius: 9px;
+            outline: none;
+            background: white;
+            color: #17233c;
+            font-size: 14px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #315d9b;
+            box-shadow: 0 0 0 3px rgba(49,93,155,0.08);
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr 260px;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon span {
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            font-size: 20px;
+            color: #8290a5;
+        }
+
+        .input-with-icon input {
+            padding-left: 42px;
+        }
+
+        /* BUTTONS */
+
+        .btn {
+            border: none;
+            background: #17345f;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn.gold {
+            background: #a86e08;
+        }
+
+        .btn.danger {
+            background: #bd3434;
+        }
+
+        .large-btn {
+            padding: 14px 24px;
+            font-size: 15px;
+        }
+
+        /* TABLE */
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            color: #69778e;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 13px;
+            border-bottom: 1px solid #dfe5ee;
+        }
+
+        td {
+            padding: 15px 13px;
+            border-bottom: 1px solid #edf0f4;
+            font-size: 14px;
+        }
+
+        tr:hover td {
+            background: #fafbfd;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status.paid {
+            color: #177641;
+            background: #e6f6ec;
+        }
+
+        .status.unpaid {
+            color: #b52c2c;
+            background: #fde8e8;
+        }
+
+        /* UNPAID LIST */
+
+        .unpaid-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #edf0f4;
+            padding: 15px 0;
+            gap: 15px;
+        }
+
+        .unpaid-item:last-child {
+            border-bottom: none;
+        }
+
+        .student-name {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .student-info {
+            color: #748197;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .amount {
+            font-weight: bold;
+            color: #a03b20;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: #7d899d;
+        }
+
+        /* SETTINGS */
+
+        .logo-setting {
+            margin-top: 25px;
+            border: 1px dashed #ccd4df;
+            border-radius: 10px;
+            padding: 18px;
+            background: #fafbfd;
+        }
+
+        .field-help {
+            margin: 5px 0 15px;
+            color: #78859a;
+            font-size: 13px;
+        }
+
+        .logo-preview {
+            margin-top: 15px;
+        }
+
+        .logo-preview img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .settings-note {
+            margin-top: 12px;
+            color: #758197;
+            font-size: 13px;
+        }
+
+        /* TOAST */
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: #17345f;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 9px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        /* PRINT */
+
+        #printArea {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .search-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header-badge {
+                display: none;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .app-header {
+                padding: 12px;
+            }
+
+            .brand-title {
+                font-size: 18px;
+            }
+
+            .brand-sub {
+                font-size: 11px;
+            }
+
+            .brand-logo-wrap {
+                width: 55px;
+                height: 55px;
+            }
+
+            .tabs {
+                padding: 0;
+                overflow-x: auto;
+            }
+
+            .tabs button {
+                padding: 14px 15px;
+                white-space: nowrap;
+            }
+
+            main {
+                padding: 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field-wide {
+                grid-column: span 1;
+            }
+
+            .page-heading {
+                display: block;
+            }
+
+            .today-chip {
+                display: inline-block;
+                margin-top: 12px;
+            }
+        }
+
+        /* PRINT CHALLAN */
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            body > * {
+                display: none !important;
+            }
+
+            #printArea {
+                display: block !important;
+            }
+
+            .print-page {
+                width: 100%;
+                padding: 15mm;
+                color: #111;
+                font-family: Arial, sans-serif;
+            }
+
+            .challan-copy {
+                border: 2px solid #6e3210;
+                padding: 15px;
+                margin-bottom: 20px;
+                page-break-inside: avoid;
+            }
+
+            .challan-header {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                border-bottom: 2px solid #6e3210;
+                padding-bottom: 10px;
+                margin-bottom: 12px;
+            }
+
+            .challan-logo {
+                width: 70px;
+                height: 70px;
+                object-fit: contain;
+            }
+
+            .challan-title {
+                font-size: 22px;
+                font-weight: bold;
+                color: #6e3210;
+            }
+
+            .challan-subtitle {
+                font-size: 13px;
+                margin-top: 3px;
+            }
+
+            .copy-label {
+                margin-left: auto;
+                font-weight: bold;
+                color: #6e3210;
+            }
+
+            .challan-info {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 7px 20px;
+                margin-bottom: 15px;
+                font-size: 13px;
+            }
+
+            .challan-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .challan-table th,
+            .challan-table td {
+                border: 1px solid #888;
+                padding: 7px;
+                text-align: left;
+            }
+
+            .challan-total td {
+                font-weight: bold;
+            }
+
+            .bank-box {
+                margin-top: 15px;
+                border: 1px solid #999;
+                padding: 10px;
+            }
+
+            .bank-box h4 {
+                margin: 0 0 7px;
+            }
+
+            .challan-footer {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header class="app-header">
+
+    <div class="brand">
+
+        <div class="brand-logo-wrap">
+            <img
+                class="school-logo"
+                src="/logo.png"
+                alt="Al-Ameen Islamic Institute"
+                onerror="this.style.display='none';"
+            >
+        </div>
+
+        <div class="brand-copy">
+
+            <p class="brand-title" id="headerSchoolName">
+                Al-Ameen Islamic Institute
+            </p>
+
+            <p class="brand-sub">
+                Student & Fee Management System
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="header-badge">
+        School Administration
+    </div>
+
+</header>
+
+
+<nav class="tabs">
+
+    <button data-tab="dashboard" class="active">
+        Dashboard
+    </button>
+
+    <button data-tab="students">
+        Students
+    </button>
+
+    <button data-tab="challan">
+        Print Challan
+    </button>
+
+    <button data-tab="settings">
+        Settings
+    </button>
+
+</nav>
+
+
+<main>
+
+<!-- ==================================================
+     DASHBOARD
+================================================== -->
+
+<section id="tab-dashboard">
+
+    <div class="page-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                Overview
+            </p>
+
+            <h1>
+                Fee Dashboard
+            </h1>
+
+            <p class="page-subtitle">
+                Search students and manage monthly fee payments.
+            </p>
+
+        </div>
+
+        <div class="today-chip" id="todayChip"></div>
+
+    </div>
+
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                👨‍🎓
+            </div>
+
+            <div>
+                <span>Total Students</span>
+                <strong id="statStudents">0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                ✓
+            </div>
+
+            <div>
+                <span>Paid This Month</span>
+                <strong id="statPaid">0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon red">
+                !
+            </div>
+
+            <div>
+                <span>Unpaid This Month</span>
+                <strong id="statUnpaid">0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon gold">
+                ₨
+            </div>
+
+            <div>
+                <span>Outstanding Amount</span>
+                <strong id="statOutstanding">Rs. 0</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    Student Ledger
+                </p>
+
+                <h2>
+                    Search a Student
+                </h2>
+
+            </div>
+
+            <span class="section-pill">
+                Monthly Status
+            </span>
+
+        </div>
+
+
+        <div class="search-row">
+
+            <div class="input-with-icon">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Type a student's name to search..."
+                >
+
+            </div>
+
+
+            <select id="monthPicker"></select>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Class</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="studentsTbody"></tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            id="dashboardEmpty"
+            class="empty"
+            style="display:none;"
+        >
+            No students found.
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    Collections
+                </p>
+
+                <h2>
+                    Students who haven't paid -
+                    <span id="unpaidMonthLabel"></span>
+                </h2>
+
+            </div>
+
+            <span class="section-pill danger-pill">
+                Outstanding
+            </span>
+
+        </div>
+
+
+        <div id="unpaidList"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     STUDENTS
+================================================== -->
+
+<section id="tab-students" style="display:none;">
+
+    <div class="page-heading compact-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                Records
+            </p>
+
+            <h1>
+                Students
+            </h1>
+
+            <p class="page-subtitle">
+                Add and manage student information.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    New Record
+                </p>
+
+                <h2>
+                    Add a New Student
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <form id="addStudentForm">
+
+            <div class="grid">
+
+                <div class="field">
+
+                    <label>
+                        Full Name *
+                    </label>
+
+                    <input
+                        required
+                        id="f_name"
+                        placeholder="Student full name"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Registration No
+                    </label>
+
+                    <input
+                        id="f_regno"
+                        placeholder="Optional"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Roll No *
+                    </label>
+
+                    <input
+                        required
+                        id="f_roll"
+                        placeholder="01"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Department
+                    </label>
+
+                    <input
+                        id="f_dept"
+                        placeholder="Optional"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Class / Section *
+                    </label>
+
+                    <input
+                        required
+                        id="f_class"
+                        placeholder="8-B"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Qari
+                    </label>
+
+                    <input
+                        id="f_qari"
+                        placeholder="Teacher / Qari"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Father / Guardian
+                    </label>
+
+                    <input
+                        id="f_father"
+                        placeholder="Parent / Guardian"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Contact Number
+                    </label>
+
+                    <input
+                        id="f_contact"
+                        placeholder="03xx-xxxxxxx"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Monthly Fee (PKR) *
+                    </label>
+
+                    <input
+                        required
+                        type="number"
+                        min="0"
+                        id="f_fee"
+                        placeholder="5000"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn gold"
+            >
+                + Add Student
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    Student Directory
+                </p>
+
+                <h2>
+                    All Students
+                    (<span id="allCount">0</span>)
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Reg. No</th>
+                        <th>Roll No</th>
+                        <th>Department</th>
+                        <th>Class</th>
+                        <th>Qari</th>
+                        <th>Monthly Fee</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="allStudentsTbody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     CHALLAN
+================================================== -->
+
+<section id="tab-challan" style="display:none;">
+
+    <div class="page-heading compact-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                Finance
+            </p>
+
+            <h1>
+                Print Challan
+            </h1>
+
+            <p class="page-subtitle">
+                Generate a professional fee challan.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    Fee Details
+                </p>
+
+                <h2>
+                    Generate & Print Fee Challan
+                </h2>
+
+            </div>
+
+            <span class="section-pill">
+                2 Copies
+            </span>
+
+        </div>
+
+
+        <div class="grid">
+
+            <div class="field">
+
+                <label>
+                    Student
+                </label>
+
+                <select id="challanStudent"></select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Month
+                </label>
+
+                <select id="challanMonth"></select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Monthly Fee
+                </label>
+
+                <input
+                    type="number"
+                    min="0"
+                    id="challanAmount"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Admission Fee
+                </label>
+
+                <input
+                    type="number"
+                    min="0"
+                    id="challanAdmission"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Arrear
+                </label>
+
+                <input
+                    type="number"
+                    min="0"
+                    id="challanArrear"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Security Charges
+                </label>
+
+                <input
+                    type="number"
+                    min="0"
+                    id="challanSecurity"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Due Date
+                </label>
+
+                <input
+                    type="date"
+                    id="challanDueDate"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Late Fee
+                </label>
+
+                <input
+                    type="number"
+                    min="0"
+                    id="challanLateFee"
+                    value="0"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn gold large-btn"
+            id="genChallanBtn"
+        >
+            Generate & Print Challan
+        </button>
+
+
+        <div class="settings-note">
+            The challan automatically includes the institute logo,
+            phone number and bank details saved in Settings.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     SETTINGS
+================================================== -->
+
+<section id="tab-settings" style="display:none;">
+
+    <div class="page-heading compact-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                Configuration
+            </p>
+
+            <h1>
+                School Settings
+            </h1>
+
+            <p class="page-subtitle">
+                These details appear on printed challans.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    Institute Profile
+                </p>
+
+                <h2>
+                    School Details
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="grid">
+
+            <div class="field field-wide">
+
+                <label>
+                    Institute Name
+                </label>
+
+                <input
+                    id="s_name"
+                    placeholder="Al-Ameen Islamic Institute"
+                >
+
+            </div>
+
+
+            <div class="field field-wide">
+
+                <label>
+                    Address
+                </label>
+
+                <input
+                    id="s_addr"
+                    placeholder="School address"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Phone
+                </label>
+
+                <input
+                    id="s_phone"
+                    placeholder="03xx-xxxxxxx"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Bank Name
+                </label>
+
+                <input
+                    id="s_bank_name"
+                    placeholder="e.g. Meezan Bank"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Account Title
+                </label>
+
+                <input
+                    id="s_account_title"
+                    placeholder="Account holder name"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Account Number
+                </label>
+
+                <input
+                    id="s_account_number"
+                    placeholder="Bank account number"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    IBAN
+                </label>
+
+                <input
+                    id="s_iban"
+                    placeholder="PK00..."
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Branch / Code
+                </label>
+
+                <input
+                    id="s_branch"
+                    placeholder="Branch name or code"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="logo-setting">
+
+            <label>
+                Institute Logo
+            </label>
+
+            <p class="field-help">
+                The logo is automatically loaded from
+                <strong>public/logo.png</strong>.
+                You do not need to upload it here.
+            </p>
+
+            <div class="logo-preview">
+
+                <img
+                    src="/logo.png"
+                    alt="School Logo"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn"
+            id="saveSettingsBtn"
+        >
+            Save Settings
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<div id="printArea"></div>
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script src="/script.js"></script>
+
+</body>
+</html>
